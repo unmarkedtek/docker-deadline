@@ -3,8 +3,8 @@
 # Copy the Deadline Repository into an internal Docker volume
 #
 docker run -ti --rm \
-	-v $(pwd)/installers:/installers \
-	-v deadline-volume:/installdir \
+	-v /Volumes/disk1/george-s/playpen/dev/docker-deadline/installers:/installers \
+	-v deadline-volume:/installdir \	
 	-w /installers \
 	centos:7 bash -c "
 		echo Installing Deadline Repository 10.0 into deadline-volume..;\
