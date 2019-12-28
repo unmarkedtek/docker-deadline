@@ -4,7 +4,7 @@
 #
 docker run -ti --rm \
 	-v /Volumes/disk1/george-s/playpen/dev/docker-deadline/installers:/installers \
-	-v deadline-volume:/installdir \	
+	-v deadline-volume:/installdir \
 	-w /installers \
 	centos:7 bash -c "
 		echo Installing Deadline Repository 10.0 into deadline-volume..;\

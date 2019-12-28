@@ -2,12 +2,7 @@
 # Run via up.sh
 #
 version: "3.7"
-networks:
-  app_net:
-
-volumes:
-  deadline-volume:
-    
+  
 
 services:
   mongo:
@@ -16,18 +11,18 @@ services:
     ports:
       - "27017"
     container_name: deadline-mongo
-    networks: 
-      - app_net
 
   deadline-slave1:
     container_name: deadline-slave1
     hostname: maya-slave1
     image: 'deadline-client-maya2020'
-    networks:
-      - app_net
     volumes:
-        - "deadline-volume:/mnt/DeadlineRepository10"
-        - ${SHARE}:/share
+        - type: volume
+          source: deadline-volume
+          target: /mnt/DeadlineRepository10
+        #- type: volume
+          #source: ${SHARE}
+          #target: /share
     entrypoint: ./deadlinelauncher
   
     # Expose REST API
@@ -37,13 +32,13 @@ services:
     image: '${IMAGE}'
     ports:
       - "8082:8082"
-    networks:
-      - app_net
     volumes:
-      - deadline-volume:/mnt/DeadlineRepository10
+      - type: volume
+        source: deadline-volume
+        target: /mnt/DeadlineRepository10
     entrypoint: ./deadlinewebservice
 
-# Expose DeadlineRepository8 as a public network share
+# Expose DeadlineRepository10 as a public network share
   deadline-samba:
     container_name: deadline-samba
     hostname: deadline-samba
@@ -52,31 +47,13 @@ services:
       - "139:139"
       - "445:445"
     volumes:
-      - deadline-volume:/share
+      - type: volume
+        source: deadline-volume
+        target: /share
     command: -s "DeadlineRepository10;/share;yes;no;yes;all;none;all"
 
-
-
-
-
-
-
-
-
-# mongo:
-#   container_name: deadline-mongo
-#   image: mongo
-#   ports:
-#     - "27017"
-
-#     services:
-#       wordpress:
-#         image: wordpress
-#         ports:
-#           - "8080:80"
-#         networks:
-#           - overlay
-#         deploy:
-#           mode: replicated
-#           replicas: 2
-#           endpoint_mode: vip
+# Externally created deadline volume created populated by install.sh
+volumes:
+  deadline-volume:
+    external: true
+  #${SHARE}:

@@ -9,7 +9,10 @@ export SHARE=$DIRNAME/share
 # You can override the image by setting an environment variable.
 # $ export IMAGE=deadline-client-maya2017
 # $ ./up
-export IMAGE=${IMAGE:-deadline-client-maya2017}
+export IMAGE=${IMAGE:-deadline10-client}
+#export DEADLINE-IMAGE=${IMAGE:-deadline10-client}
+#export MAYA_DEADLINE_IMAGE=${IMAGE:-deadline-client-maya2020}
+
 
 docker-compose up
 
