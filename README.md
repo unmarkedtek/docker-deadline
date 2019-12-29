@@ -264,16 +264,25 @@ requests.exceptions.ConnectionError: HTTPConnectionPool(host='192.168.99.100', p
 
 One solution to this is to simply bring it down, and back up again.
 
-My Notes 
+```My Notes 
+```
+have updated to deadline10.25 centos7 and maya2019
+
+download and add the following to installers folder.
+-rw-rw-r--@ 1 george-s  admin  1402392631 28 Dec 23:14 Autodesk_Maya_2019_Linux_64bit.tgz
+-rwxrwxr-x@ 1 george-s  admin   223070212 29 Dec 12:03 DeadlineClient-10.0.25.2-linux-x64-installer.run
+-rwxrwxr-x@ 1 george-s  admin   512126465 16 Apr  2019 DeadlineRepository-10.0.25.2-linux-x64-installer.run
+
+```Issues
+```
 
 
-Issues
-have updated to deadline10.25., centos7 and maya2019
-on first up.sh mongo hangs. if you do docker pull mongo then it's OK???
 either maya2019-base-centos7 is misnamed or it should inherit for docker image rather than this way around ? 
 
 Current Image dependencies
 
-maya2019-base-centos7-> deadline10-> maya2019
+centos7-> centos7-base-> deadline10-client-> deadline10-client-maya2019
+
+
 
 

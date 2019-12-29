@@ -1,6 +1,6 @@
-FROM centos:centos7
+FROM centos:7
 
-
+# RPMS python packages needed by deadline & maya
 RUN yum update -y && yum install -y \
     nano \
     csh \

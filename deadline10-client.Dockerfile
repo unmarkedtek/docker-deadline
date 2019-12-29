@@ -1,4 +1,4 @@
-FROM maya2019-base-centos7:latest
+FROM centos7-base-server:latest
 
 
 # Copy over the installer.
