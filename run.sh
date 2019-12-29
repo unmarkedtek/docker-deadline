@@ -29,5 +29,5 @@ docker run -ti --rm \
 	deadline-client-maya2019
 
 
-docker network connnect docker-deadline_default $NAME
+# example
 #docker run -d --name firefox -e DISPLAY=$ip:0 -v /tmp/.X11-unix:/tmp/.X11-unix jess/firefox
