@@ -260,4 +260,27 @@ Sometimes Deadline Monitor quits when running `docker-compose up` due to Mongo n
 requests.exceptions.ConnectionError: HTTPConnectionPool(host='192.168.99.100', port=8082): Max retries exceeded with url: /api/jobs
 ```
 
+
+
 One solution to this is to simply bring it down, and back up again.
+
+My Notes 
+
+Image dependencies
+
+maya2019-base-centos7-> deadline10-> maya2019
+
+
+
+libtiff
+ yum install libtiff
+    9  ln -s libtiff.so.3 libtiff.so.5
+
+ln -s  libpcre.so.0 libpcre16.so.0
+
+libpng
+l n -s libpng.so.3  libpng15.so.15
+
+ln -s libgstriff-0.10.so.0 libgstreamer-1.0.so.0
+ln -s libgstapp-0.10.so.0  libgstapp-1.0.so.0
+
