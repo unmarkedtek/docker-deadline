@@ -266,21 +266,14 @@ One solution to this is to simply bring it down, and back up again.
 
 My Notes 
 
-Image dependencies
+
+Issues
+have updated to deadline10.25., centos7 and maya2019
+on first up.sh mongo hangs. if you do docker pull mongo then it's OK???
+either maya2019-base-centos7 is misnamed or it should inherit for docker image rather than this way around ? 
+
+Current Image dependencies
 
 maya2019-base-centos7-> deadline10-> maya2019
 
-
-
-libtiff
- yum install libtiff
-    9  ln -s libtiff.so.3 libtiff.so.5
-
-ln -s  libpcre.so.0 libpcre16.so.0
-
-libpng
-l n -s libpng.so.3  libpng15.so.15
-
-ln -s libgstriff-0.10.so.0 libgstreamer-1.0.so.0
-ln -s libgstapp-0.10.so.0  libgstapp-1.0.so.0
 
