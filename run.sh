@@ -26,8 +26,8 @@ docker run -ti --rm \
 	-v /Volumes/disk1/george-s/playpen/dev/docker-deadline/share:/share  \
 	--network="docker-deadline_default" \
 	--entrypoint $EXECUTABLE \
-	deadline-client-maya2019
-
-
-# example
+	deadline10-client
+	
+	
+# gui example
 #docker run -d --name firefox -e DISPLAY=$ip:0 -v /tmp/.X11-unix:/tmp/.X11-unix jess/firefox
