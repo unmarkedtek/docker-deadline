@@ -15,14 +15,14 @@ services:
   deadline-slave1:
     container_name: deadline-slave1
     hostname: maya-slave1
-    image: 'deadline-client-maya2020'
+    image: 'deadline-client-maya2019'
     volumes:
         - type: volume
           source: deadline-volume
           target: /mnt/DeadlineRepository10
-        #- type: volume
-          #source: ${SHARE}
-          #target: /share
+        - ./share:/share
+          
+          
     entrypoint: ./deadlinelauncher
   
     # Expose REST API
@@ -52,8 +52,8 @@ services:
         target: /share
     command: -s "DeadlineRepository10;/share;yes;no;yes;all;none;all"
 
-# Externally created deadline volume created populated by install.sh
+#Externally created deadline volume created populated by install.sh
 volumes:
   deadline-volume:
     external: true
-  #${SHARE}:
+ 
