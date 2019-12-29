@@ -1,6 +1,5 @@
 FROM centos:centos7
 
-MAINTAINER marcus@abstractfactory.io
 
 RUN yum update -y && yum install -y \
     nano \

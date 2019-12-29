@@ -1,6 +1,6 @@
 FROM maya2019-base-centos7:latest
 
-MAINTAINER george@unmarkedtek
+
 
 
 # Copy over the installer.

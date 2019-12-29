@@ -1,7 +1,6 @@
 #FROM mottosso/mayabase-centos:latest
 FROM deadline10-client:latest
 
-MAINTAINER george@unmarkedtek
 
 #Linux Version not available for download. Copy from installers
 #mechanism will ensure that this only happens once.
