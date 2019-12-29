@@ -22,6 +22,7 @@ RUN yum update -y && yum install -y \
     xorg-x11-server-Xorg \
     xorg-x11-server-Xvfb \
     bzip2 \
+    mesa-libGLU \
     wget && \
     yum groupinstall -y "X Window System" && \
     yum clean all
