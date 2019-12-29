@@ -273,11 +273,13 @@ download and add the following to installers folder.
 -rwxrwxr-x@ 1 george-s  admin   223070212 29 Dec 12:03 DeadlineClient-10.0.25.2-linux-x64-installer.run
 -rwxrwxr-x@ 1 george-s  admin   512126465 16 Apr  2019 DeadlineRepository-10.0.25.2-linux-x64-installer.run
 
+in theory should be able to: install.sh; build.sh, up.sh
+
 ```Issues
 ```
+Tried to set a context for deadline10-client by moving the installer to it's owm subdir within installers. 
+The context part was faster but then it failed to find the file..
 
-
-either maya2019-base-centos7 is misnamed or it should inherit for docker image rather than this way around ? 
 
 Current Image dependencies
 
