@@ -6,7 +6,7 @@ version: "3.7"
 # deadline mongo database
 services:
   mongo:
-    build: .
+    #build: .
     image: mongo
     ports:
       - "27017"
@@ -16,7 +16,7 @@ services:
   deadline-slave1:
     container_name: deadline-slave1
     hostname: maya-slave1
-    image: 'deadline-client-maya2019'
+    image: 'deadline10-client-maya2019'
     volumes:
         - type: volume
           source: deadline-volume
