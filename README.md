@@ -266,14 +266,18 @@ One solution to this is to simply bring it down, and back up again.
 
 ```My Notes 
 ```
-have updated to deadline10.25 centos7 and maya2019
+Have updated to deadline10.25 centos7 and maya2019.
 
-download and add the following to installers folder.
--rw-rw-r--@ 1 george-s  admin  1402392631 28 Dec 23:14 Autodesk_Maya_2019_Linux_64bit.tgz
--rwxrwxr-x@ 1 george-s  admin   223070212 29 Dec 12:03 DeadlineClient-10.0.25.2-linux-x64-installer.run
--rwxrwxr-x@ 1 george-s  admin   512126465 16 Apr  2019 DeadlineRepository-10.0.25.2-linux-x64-installer.run
+We must first download and add the following to installers folder.
+Autodesk_Maya_2019_Linux_64bit.tgz
+DeadlineClient-10.0.25.2-linux-x64-installer.run
+DeadlineRepository-10.0.25.2-linux-x64-installer.run
 
-in theory should be able to: install.sh; build.sh, up.sh
+
+in theory should be able to run the following:  install.sh; build.sh, up.sh to get the farm running,
+
+then run deadline-monitor.sh and submit the /share/my_file.ma using deadline's maya submitter.
+
 
 ```Issues
 ```
