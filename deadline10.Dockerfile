@@ -1,11 +1,10 @@
 FROM maya2019-base-centos7:latest
 
 
-
-
 # Copy over the installer.
 RUN mkdir /tmp/thinkboxsetup/
 COPY installers/DeadlineClient-10.*-linux-x64-installer.run /tmp/thinkboxsetup/
+
 
 # Run the installer.
 RUN /tmp/thinkboxsetup/DeadlineClient-10.*-linux-x64-installer.run \
