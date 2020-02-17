@@ -10,6 +10,7 @@ elif [[ $(uname -s) == "Linux" ]]; then
 else
 	exit "unknown host os"
 fi
+#ip="127.0.0.1"
 xhost + $ip
 
 

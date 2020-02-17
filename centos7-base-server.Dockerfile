@@ -22,6 +22,9 @@ RUN yum update -y && yum install -y \
     xorg-x11-server-Xvfb \
     bzip2 \
     mesa-libGLU \
+    redhat-lsb \
+    libX11 \
+    libXext \
     wget && \
     yum groupinstall -y "X Window System" && \
     yum clean all
