@@ -1,6 +1,12 @@
 #
 # run.sh is used by deadlinemonitor and deadlinewebservice
 #
+#
+# generic gui example
+#docker run -d --name firefox -e DISPLAY=$ip:0 -v /tmp/.X11-unix:/tmp/.X11-unix jess/firefox
+
+
+
 
 # Add docker host ip to access control list 
 if [[ $(uname -s) == "Darwin" ]]; then
@@ -10,25 +16,33 @@ elif [[ $(uname -s) == "Linux" ]]; then
 else
 	exit "unknown host os"
 fi
-#ip="127.0.0.1"
+
 xhost + $ip
 
 
+# Set display for OSX and Linux differently
+if [[ $(uname -s) == "Darwin" ]]; then
+	display=$ip:0
+elif [[ $(uname -s) == "Linux" ]]; then
+	display=:0
+else
+	exit "unknown host os"
+fi
 
+# Set the container name and the executable from the wrapper script
 NAME=$1
 EXECUTABLE=$2
 
+# Run the container on osx or Linux docker host
 docker run -ti --rm \
 	--name $NAME \
 	-h $NAME \
-    -e DISPLAY=$ip:0 \
+	-e DISPLAY=$display \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
-  	-v deadline-volume:/mnt/DeadlineRepository10 \
-	-v /Volumes/disk1/george-s/playpen/dev/docker-deadline/share:/share  \
+	-v deadline-volume:/mnt/DeadlineRepository10 \
+	-v /disk1/george-s/playpen/dev/docker-deadline/share:/share  \
 	--network="docker-deadline_default" \
 	--entrypoint $EXECUTABLE \
 	deadline10-client
-	
-	
-# gui example
-#docker run -d --name firefox -e DISPLAY=$ip:0 -v /tmp/.X11-unix:/tmp/.X11-unix jess/firefox
+
+
