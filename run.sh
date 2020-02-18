@@ -29,6 +29,16 @@ else
 	exit "unknown host os"
 fi
 
+# Set volumes for OSX and Linux differently - modify this for your own
+if [[ $(uname -s) == "Darwin" ]]; then
+	share_volume="/Volumes/disk1/george-s/playpen/dev/docker-deadline/share:/share"
+elif [[ $(uname -s) == "Linux" ]]; then
+	share_volume="disk1/george-s/playpen/dev/docker-deadline/share:/share"
+else
+	exit "unknown host os"
+fi
+
+
 # Set the container name and the executable from the wrapper script
 NAME=$1
 EXECUTABLE=$2
