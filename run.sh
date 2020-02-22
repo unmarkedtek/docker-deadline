@@ -10,7 +10,7 @@
 
 # Add docker host ip to access control list 
 if [[ $(uname -s) == "Darwin" ]]; then
-	ip=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2)
+	ip=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | grep -v 10.110 | cut -d\  -f2)
 elif [[ $(uname -s) == "Linux" ]]; then
 	ip=$(hostname -i)
 else
@@ -33,7 +33,7 @@ fi
 if [[ $(uname -s) == "Darwin" ]]; then
 	share_volume="/Volumes/disk1/george-s/playpen/dev/docker-deadline/share:/share"
 elif [[ $(uname -s) == "Linux" ]]; then
-	share_volume="disk1/george-s/playpen/dev/docker-deadline/share:/share"
+	share_volume="/disk1/george-s/playpen/dev/docker-deadline/share:/share"
 else
 	exit "unknown host os"
 fi
@@ -50,9 +50,9 @@ docker run -ti --rm \
 	-e DISPLAY=$display \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-v deadline-volume:/mnt/DeadlineRepository10 \
-	-v /disk1/george-s/playpen/dev/docker-deadline/share:/share  \
+	-v $share_volume  \
 	-v deadline-samba:/share2 \
-	--network=host \
+	--network=docker-deadline_default \
 	--entrypoint $EXECUTABLE \
 	deadline10-client
 #--network="docker-deadline_default" \
