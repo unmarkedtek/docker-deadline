@@ -51,8 +51,9 @@ docker run -ti --rm \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-v deadline-volume:/mnt/DeadlineRepository10 \
 	-v /disk1/george-s/playpen/dev/docker-deadline/share:/share  \
-	--network="docker-deadline_default" \
+	-v deadline-samba:/share2 \
+	--network=host \
 	--entrypoint $EXECUTABLE \
 	deadline10-client
-
+#--network="docker-deadline_default" \
 

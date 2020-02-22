@@ -14,5 +14,6 @@ docker run -ti --rm \
 	    --dbport 27017 \
 	    --prefix /installdir \
 	    --installmongodb false \
+		--network=host \
 	    --prepackagedDB false; \
 	echo Finished successfully"
