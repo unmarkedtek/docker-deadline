@@ -52,6 +52,7 @@ services:
         source: deadline-volume
         target: /share
     command: -s "DeadlineRepository10;/share;yes;no;yes;all;none;all"
+    #network_mode: host
 
 #Externally created deadline volume created populated by install.sh
 volumes:
