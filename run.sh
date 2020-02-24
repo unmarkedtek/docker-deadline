@@ -55,5 +55,5 @@ docker run -ti --rm \
 	--network="docker-deadline_dockernet" \
 	--entrypoint $EXECUTABLE \
 	deadline10-client
-#--network="docker-deadline_default" \
+
 
