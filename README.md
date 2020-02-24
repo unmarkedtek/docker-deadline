@@ -266,33 +266,24 @@ One solution to this is to simply bring it down, and back up again.
 
 ```My Notes 
 ```
-Have updated to deadline10.25 centos7 and maya2019.
+Have updated to 10.1.3 (previously got this working on 10.0.25.2) centos7 and maya2019 
 
 We must first download and add the following to installers folder.
 Autodesk_Maya_2019_Linux_64bit.tgz
-DeadlineClient-10.0.25.2-linux-x64-installer.run
-DeadlineRepository-10.0.25.2-linux-x64-installer.run
+DeadlineClient-10.1.3-linux-x64-installer.run
+DeadlineRepository-10.1.3-linux-x64-installer.run 
 
 
 in theory should be able to run the following:  install.sh; build.sh, up.sh to get the farm running,
 
 then run deadline-monitor.sh and submit the /share/my_file.ma using deadline's maya submitter.
 
-
-```Issues
-```
-Tried to set a smaller docker context for deadline10-client by moving the installer to it's owm subdir within installers.  The context part was faster but then it failed to find the file..
-
-
-Current Image dependencies
-
-centos7-> centos7-base-> deadline10-client-> deadline10-client-maya2019
-
 ****************************
 deadline 10.1.3 needs ipv6
 ****************************
 
-With deadline 10.1.3 needs ipv6 according to this post
+
+With deadline 10.1.3 there's a bug which causes launcher to fail if it doesn't find ipv6 according to this post. 
 https://forums.thinkboxsoftware.com/t/launcher-error-with-deadline-10-1/25710/9
 
 getting docker to run with ipv6 requires changes to daemon.json
@@ -311,3 +302,19 @@ had to put this in the up.sh wrapper
 docker network create --driver bridge --ipv6 --subnet fd15:555::/64 --subnet 172.16.238.0/24 dockernet  --attachable
 
 down.sh now doesn't delete the nework if the manager is running. - did that happen before????
+
+
+
+```Current Image dependencies
+```
+
+centos7-> centos7-base-> deadline10-client-> deadline10-client-maya2019
+
+```Issues
+```
+Tried to set a smaller docker context for deadline10-client by moving the installer to it's owm subdir within installers.  The context part was faster but then it failed to find the file..
+
+
+
+
+
