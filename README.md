@@ -281,14 +281,33 @@ then run deadline-monitor.sh and submit the /share/my_file.ma using deadline's m
 
 ```Issues
 ```
-Tried to set a context for deadline10-client by moving the installer to it's owm subdir within installers. 
-The context part was faster but then it failed to find the file..
+Tried to set a smaller docker context for deadline10-client by moving the installer to it's owm subdir within installers.  The context part was faster but then it failed to find the file..
 
 
 Current Image dependencies
 
 centos7-> centos7-base-> deadline10-client-> deadline10-client-maya2019
 
+****************************
+deadline 10.1.3 needs ipv6
+****************************
 
+With deadline 10.1.3 needs ipv6 according to this post
+https://forums.thinkboxsoftware.com/t/launcher-error-with-deadline-10-1/25710/9
 
+getting docker to run with ipv6 requires changes to daemon.json
 
+{
+  "ipv6": true,
+  "fixed-cidr-v6": "2001:db8:1::/64"
+}
+
+if you make an error 
+
+~]$ less .docker/daemon.json
+
+can't creat ipv6 netowork with compose.
+had to put this in the up.sh wrapper
+docker network create --driver bridge --ipv6 --subnet fd15:555::/64 --subnet 172.16.238.0/24 dockernet  --attachable
+
+down.sh now doesn't delete the nework if the manager is running. - did that happen before????
