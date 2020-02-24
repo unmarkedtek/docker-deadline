@@ -52,7 +52,7 @@ docker run -ti --rm \
 	-v deadline-volume:/mnt/DeadlineRepository10 \
 	-v $share_volume  \
 	-v deadline-samba:/share2 \
-	--network=docker-deadline_default \
+	--network="docker-deadline_dockernet" \
 	--entrypoint $EXECUTABLE \
 	deadline10-client
 #--network="docker-deadline_default" \

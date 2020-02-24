@@ -1,16 +1,20 @@
 #
 # Run via up.sh
+# By default creates network "docker-deadline_default" based on parent dirname
 #
 version: "3.7"
-  
-# deadline mongo database
+
 services:
+
+  # deadline mongo database
   mongo:
-    #build: .
     image: mongo
     ports:
       - "27017"
     container_name: deadline-mongo
+    networks:
+      dockernet:
+
   
   # deadline maya slave 
   deadline-slave1:
@@ -22,8 +26,8 @@ services:
           source: deadline-volume
           target: /mnt/DeadlineRepository10
         - ./share:/share
-          
-          
+    networks:
+      dockernet:          
     entrypoint: ./deadlinelauncher
   
     # Expose REST API
@@ -37,6 +41,8 @@ services:
       - type: volume
         source: deadline-volume
         target: /mnt/DeadlineRepository10
+    networks:
+      dockernet:
     entrypoint: ./deadlinewebservice
 
 # Expose DeadlineRepository10 as a public network share
@@ -51,11 +57,24 @@ services:
       - type: volume
         source: deadline-volume
         target: /share
+    networks:
+      dockernet:
+      
     command: -s "DeadlineRepository10;/share;yes;no;yes;all;none;all"
-    #network_mode: host
+        
+
+    
 
 #Externally created deadline volume created populated by install.sh
 volumes:
   deadline-volume:
     external: true
- 
+
+#As version 3 Compose yml does not support ipv6 yet creating/tearing down 
+#ipv6 docker externally as part of up.sh and down.sh
+networks:
+    dockernet:
+      
+        
+
+
