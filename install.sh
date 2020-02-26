@@ -12,7 +12,7 @@ else
 	exit "unknown host os"
 fi
 docker run -ti --rm \
-	-v $installers_volume:/installers \
+	-v $installers_volume \
 	-v deadline-volume:/installdir \
 	-w /installers \
 	centos:7 bash -c "
