@@ -1,3 +1,4 @@
 installers/**
 *.png
 share/**
+nfs-deadline-volume/**
