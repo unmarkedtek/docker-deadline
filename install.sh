@@ -11,6 +11,8 @@ elif [[ $(uname -s) == "Linux" ]]; then
 else
 	exit "unknown host os"
 fi
+
+
 docker run -ti --rm \
 	-v $installers_volume \
 	-v deadline-volume:/installdir \
@@ -23,6 +25,7 @@ docker run -ti --rm \
 	    --dbport 27017 \
 	    --prefix /installdir \
 	    --installmongodb false \
-		--network=host \
 	    --prepackagedDB false; \
 	echo Finished successfully"
+
+	

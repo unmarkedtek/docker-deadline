@@ -1,7 +1,8 @@
 #
 # Run via up.sh
-# By default creates network "docker-deadline_default" based on parent dirname
-#
+# Deadline 10.1.3.6 has a bug which requires IPv6 
+# up.sh/down.sh creatinging destroying ipv6 network
+# 
 version: "3.7"
 
 services:
@@ -65,16 +66,14 @@ services:
 
     
 
-#Externally created deadline volume created populated by install.sh
+#Externally created deadline-volume populated by install.sh
 volumes:
   deadline-volume:
     external: true
+  
+# deadline 10.1.3.6 deadline has a bug which requires ipv6
+# As version 3 compose yml does not support ipv6 yet creating/tearing down 
+# ipv6 dockernet create/destroyed externally as part of up.sh and down.sh
 
-#As version 3 Compose yml does not support ipv6 yet creating/tearing down 
-#ipv6 docker externally as part of up.sh and down.sh
 networks:
     dockernet:
-      
-        
-
-
