@@ -11,7 +11,7 @@ services:
   mongo:
     image: mongo
     ports:
-      - "27017"
+      - "27017:27017"
     container_name: deadline-mongo
     networks:
       dockernet:
@@ -60,8 +60,9 @@ services:
         target: /share
     networks:
       dockernet:
-      
+
     command: -s "DeadlineRepository10;/share;yes;no;yes;all;none;all"
+    command: -s "Deadline10installers;/installers;yes;no;yes;all;none;all"
         
 
     
