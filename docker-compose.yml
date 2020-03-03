@@ -57,12 +57,14 @@ services:
     volumes:
       - type: volume
         source: deadline-volume
-        target: /share
+        target: /share-repo
+      - type: bind
+        source: /disk1/george-s/playpen/dev/docker-deadline/installers
+        target: /share-installers
     networks:
       dockernet:
 
-    command: -s "DeadlineRepository10;/share;yes;no;yes;all;none;all"
-    command: -s "Deadline10installers;/installers;yes;no;yes;all;none;all"
+    command: -s "DeadlineRepository10;/share-repo;yes;no;yes;all;none;all" -s "Deadline10installers;/share-installers;yes;no;yes;all;none;all"
         
 
     
