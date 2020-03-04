@@ -20,4 +20,10 @@ docker network create --driver bridge --ipv6 --subnet fd15:555::/64 --subnet 172
 
 docker-compose up
 
+sleep 30
+docker-compose exec deadline-slave1 /opt/Thinkbox/Deadline10/bin/deadlinecommand addpool spot
+docker-compose exec deadline-slave1 /opt/Thinkbox/Deadline10/bin/deadlinecommand addgroup spot-fleet
+docker-compose exec deadline-slave1 /opt/Thinkbox/Deadline10/bin/deadlinecommand AddPoolToSlave maya-slave1 spot
+
+
 popd > /dev/null

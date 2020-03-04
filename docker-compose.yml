@@ -30,6 +30,12 @@ services:
     networks:
       dockernet:          
     entrypoint: ./deadlinelauncher
+    healthcheck:
+      test: ["CMD", "/opt/Thinkbox/Deadline10/bin/deadlinecommand", "SlaveExists", "$HOSTNAME"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
   
     # Expose REST API
   deadline-webservice:
@@ -45,6 +51,7 @@ services:
     networks:
       dockernet:
     entrypoint: ./deadlinewebservice
+
 
 # Expose DeadlineRepository10 as a public network share
   deadline-samba:
@@ -65,8 +72,22 @@ services:
       dockernet:
 
     command: -s "DeadlineRepository10;/share-repo;yes;no;yes;all;none;all" -s "Deadline10installers;/share-installers;yes;no;yes;all;none;all"
-        
 
+  # deadline maya slave 
+  deadline-pulse:
+    container_name: deadline-pulse
+    hostname: deadline-pulse
+    image: 'deadline10-client-maya2019'
+    depends_on: 
+      [deadline-slave1]
+    volumes:
+        - type: volume
+          source: deadline-volume
+          target: /mnt/DeadlineRepository10
+        - ./share:/share
+    networks:
+      dockernet:        
+    entrypoint: ./deadlinepulse
     
 
 #Externally created deadline-volume populated by install.sh
