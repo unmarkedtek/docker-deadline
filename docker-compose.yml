@@ -18,9 +18,9 @@ services:
 
   
   # deadline maya slave 
-  deadline-slave1:
-    container_name: deadline-slave1
-    hostname: maya-slave1
+  maya-worker1:
+    container_name: maya-worker1
+    hostname: maya-worker1
     image: 'deadline10-client-maya2019'
     volumes:
         - type: volume
@@ -36,6 +36,24 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
+  
+  # deadline configurator sets up spot pool, aws-fleet and adds maya 
+  deadline-configurator:
+    container_name: deadline-configurator
+    hostname: deadline-configurator
+    image: 'deadline10-client-maya2019'
+    volumes:
+        - type: volume
+          source: deadline-volume
+          target: /mnt/DeadlineRepository10
+        - ./share:/share
+        - type: bind
+          source: /disk1/george-s/playpen/dev/docker-deadline/scripts
+          target: /scripts
+    networks:
+      dockernet:        
+    entrypoint: /scripts/deadline_configurator.sh
+
   
     # Expose REST API
   deadline-webservice:
@@ -53,7 +71,7 @@ services:
     entrypoint: ./deadlinewebservice
 
 
-# Expose DeadlineRepository10 as a public network share
+# Expose DeadlineRepository10, installers and scripts as a public network shares
   deadline-samba:
     container_name: deadline-samba
     hostname: deadline-samba
@@ -68,28 +86,34 @@ services:
       - type: bind
         source: /disk1/george-s/playpen/dev/docker-deadline/installers
         target: /share-installers
+      - type: bind
+        source: /disk1/george-s/playpen/dev/docker-deadline/scripts
+        target: /share-scripts
+
     networks:
       dockernet:
 
-    command: -s "DeadlineRepository10;/share-repo;yes;no;yes;all;none;all" -s "Deadline10installers;/share-installers;yes;no;yes;all;none;all"
+    command: -s "DeadlineRepository10;/share-repo;yes;no;yes;all;none;all" -s "Deadline10installers;/share-installers;yes;no;yes;all;none;all" -s "scripts;/share-scripts;yes;no;yes;all;none;all"
 
-  # deadline maya slave 
+  # deadline pulse has to wait before it start - currently waiting mayaslave1 
   deadline-pulse:
     container_name: deadline-pulse
     hostname: deadline-pulse
     image: 'deadline10-client-maya2019'
     depends_on: 
-      [deadline-slave1]
+      [maya-worker1]
     volumes:
         - type: volume
           source: deadline-volume
           target: /mnt/DeadlineRepository10
         - ./share:/share
+        - type: bind
+          source: /disk1/george-s/playpen/dev/docker-deadline/scripts
+          target: /scripts
     networks:
       dockernet:        
-    entrypoint: ./deadlinepulse
+    entrypoint: ./deadlinepulse --nogui
     
-
 #Externally created deadline-volume populated by install.sh
 volumes:
   deadline-volume:
