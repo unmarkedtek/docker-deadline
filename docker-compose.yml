@@ -30,12 +30,7 @@ services:
     networks:
       dockernet:          
     entrypoint: ./deadlinelauncher
-    healthcheck:
-      test: ["CMD", "/opt/Thinkbox/Deadline10/bin/deadlinecommand", "SlaveExists", "$HOSTNAME"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
+   
   
   # deadline configurator sets up spot pool, aws-fleet and adds maya 
   deadline-configurator:
@@ -48,11 +43,12 @@ services:
           target: /mnt/DeadlineRepository10
         - ./share:/share
         - type: bind
-          source: /disk1/george-s/playpen/dev/docker-deadline/scripts
+          source: ${DOCKER_HOST_DOCKER_DEADLINE_SCRIPTS_PATH}
           target: /scripts
     networks:
       dockernet:        
     entrypoint: /scripts/deadline_configurator.sh
+    
 
   
     # Expose REST API
@@ -84,10 +80,10 @@ services:
         source: deadline-volume
         target: /share-repo
       - type: bind
-        source: /disk1/george-s/playpen/dev/docker-deadline/installers
+        source: ${DOCKER_HOST_DOCKER_DEADLINE_INSTALLER_PATH}
         target: /share-installers
       - type: bind
-        source: /disk1/george-s/playpen/dev/docker-deadline/scripts
+        source: ${DOCKER_HOST_DOCKER_DEADLINE_SCRIPTS_PATH}
         target: /share-scripts
 
     networks:
@@ -107,9 +103,6 @@ services:
           source: deadline-volume
           target: /mnt/DeadlineRepository10
         - ./share:/share
-        - type: bind
-          source: /disk1/george-s/playpen/dev/docker-deadline/scripts
-          target: /scripts
     networks:
       dockernet:        
     entrypoint: ./deadlinepulse --nogui
